@@ -1,0 +1,136 @@
+- npm i axios
+- npm i primevue :: en main.js usar app.use(primevue)
+- npm i primeflex es para css(usar de ser necesario)
+- npm i primeicons
+
+- opc src/shared/nombre -> Api (logo-api.services.js //obtener logo
+- opc src/shared/language si gustas agregar (api para idiomas)
+
+- crear src/NombreAPI/services -> nombre-api.service(js)
+    
+contenido{  
+    import axios from 'axios'
+    const http: = axios.create({
+    baseURL: 'https://urlrepite/'   
+    });
+    
+    export class nombreApiService{
+    
+    //en caso de necesitar key
+
+    apiKey='IngresekeyquetedalaApi'
+
+    //AGREGAR METODOS FORMAS:
+    //con parametro $***
+    static async getSearchbyParameter(Parameter){
+    const response = await http.get('parameter/${parameterSegunApi}');
+    return response.data[0]; //suponinendo que la respuesta contenga solo 1
+
+    // con key
+    async getParameter(){
+    const response = await http.get('url?apiKey=${this.apiKey}');
+    return response.data;
+    }
+
+    //sin parametro y sin key : sin async
+    getParameter(){
+    return http.get('url');
+    }
+    
+    //parametro y key
+    async getParameter(Paramenter){
+    const response = await http.get('url/?Parameter=${Parameter}&apiKey=${apiKey}');
+    return reonse.data; //data[0];
+    }
+
+    //tambien se puede agregar para cada get 
+    static async getNombre(){
+    try{
+    const *****
+    return ***
+    } catch(error){
+    //manejo de errores
+    console.error(error);
+      }
+     }
+    }
+}
+
+- crear src/Nombre/model 
+
+    //En model agregar todo lo que te puede dar la api ejemplo:
+
+contenido{
+
+    export class Country{
+    constructor(name, officialName, currency, capital, region,subregion,languages) {
+        this.name = name;
+        this.officialName = officialName;
+        this.currency = currency;
+        this.capital = capital;
+        this.region = region;
+        this.subregion = subregion;
+        this.languages = languages;
+
+    }
+}
+
+
+- Eliminar contenido de App.vue y cambiarle el nombre a app.vue  
+- Eliminar carpeta src/compoenents que viene por defecto en vue & src/assets
+
+
+- Incorporar plugin primevue en app.vue
+contenido{
+    
+    const app=createApp(App);
+    app.use(PrimeVue);
+    app.mount('#app');
+
+}
+  //para agregar temas de primevue solo se importa en main.js usando url de web
+  import 'primevue/resources/themes/md-light-indigo/theme.css'
+  //tambien se agrega(no se porque)
+  import 'primevue/resources/primevue.min.css';
+
+  //para iconos
+  import 'primeicons/primeicons.css';
+
+  //para activar ripple(efecto de apretar botones) en la parte de app.use(PrimeVue, {ripple: true}); // agregas llaves y lo de dentro. Ignorar el error que marca
+
+  //para importar primeflex main.js
+  import 'primeflex/primeflex.css'; //antes de eso debes instalar con npm
+
+
+  //PARA COMPONENETES(en main.js) : luego del app.use y antes de app.mount (se eliminar el punto y coma para agregar lo sgt)
+contenido{
+    .component('pv-nameComponent0', NameComponent0)
+    .component('pv-nameComponent1', NameComponent1)
+    .component('pv-nameComponent2', NameComponent2);
+}
+  //luego se importa los componentes en caso no lo haya hecho automatico webstorm
+  import NameComponent0 from "primevue/nameComponent", etc
+
+
+- crear src/Nombre/components
+    //En components crear un archivo vue dandole a la opcion Options API(segunda) usasndo nombre-car.component 
+    Lo de card creo que es para que se presente en forma de tarjetas. Una vez creado en name: se borra la parte que dice component. Luego das coma(,) y creas props:{}
+
+contenido{
+props: {
+    nombre: {
+        type: Nombre, (para el caso Country,importar lo que hichiste en model a veces se hace solo)
+        required: true  
+        }
+    }
+}
+    (Aclasro que todo eso va en la parte de script)
+
+    //ALERTA MUCHO TEXTO
+    //Una vez tengas lo anterior en template tienes que guiarte de primevue 
+
+    //para el caso agregamos card
+
+    ver ejemplo github
+- ahora crear componente list de paises
+
